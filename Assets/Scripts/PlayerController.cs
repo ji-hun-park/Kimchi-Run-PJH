@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -38,6 +39,22 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetInteger("State", 2);
             }
             isGrounded = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            
+        }
+        else if (other.CompareTag("Food"))
+        {
+            
+        }
+        else if (other.CompareTag("Golden"))
+        {
+            
         }
     }
 }
