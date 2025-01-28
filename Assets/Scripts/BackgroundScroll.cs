@@ -6,6 +6,9 @@ public class BackgroundScroll : MonoBehaviour
     [Tooltip("How fast should the texture scroll?")]
     public float ScrollSpeed;
     
+    [Header("References")]
+    public MeshRenderer meshRenderer;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
