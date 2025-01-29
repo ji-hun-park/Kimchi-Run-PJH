@@ -11,7 +11,12 @@ public class PlayerController : MonoBehaviour
     
     public Animator playerAnimator;
     
+    public BoxCollider2D playerCollider;
+    
     private bool isGrounded = true;
+    
+    private int lives = 3;
+    private bool isInvincible = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +35,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void KillPlayer()
+    {
+        playerCollider.enabled = false;
+        playerAnimator.enabled = false;
+        playerRigidBody.AddForceY(jumpForce, ForceMode2D.Impulse);
+    }
+
+    void Hit()
+    {
+        lives = Mathf.Max(0, lives - 1);
+        if (lives == 0)
+        {
+            KillPlayer();
+        }
+    }
+    
+    void Heal()
+    {
+        lives = Mathf.Min(3, lives + 1);
+    }
+
+    void StartInvincible()
+    {
+        isInvincible = true;
+        Invoke("StopInvincible", 5f);
+    }
+    
+    void StopInvincible()
+    {
+        isInvincible = false;
+    }
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Platform")
@@ -46,15 +83,21 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            
+            if (!isInvincible)
+            {
+                Destroy(other.gameObject);
+                Hit();
+            }
         }
         else if (other.CompareTag("Food"))
         {
-            
+            Destroy(other.gameObject);
+            Heal();
         }
         else if (other.CompareTag("Golden"))
         {
-            
+            Destroy(other.gameObject);
+            StartInvincible();
         }
     }
 }
