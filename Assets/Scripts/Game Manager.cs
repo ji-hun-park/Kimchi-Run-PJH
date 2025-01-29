@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public GameState state = GameState.Intro;
-    
+
+    public float playStartTime;
     public int lives = 3;
     public bool isInvincible = false;
 
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
     public GameObject goldSpawner;
     
     public PlayerController playerScript;
+    
+    public TMP_Text scoreText;
 
     private void Awake()
     {
@@ -45,6 +49,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (state == GameState.Playing)
+        {
+            scoreText.text = "Score: " + Mathf.FloorToInt(CalculateScore());
+        }
+        
         if (state == GameState.Intro && Input.GetKeyDown(KeyCode.Space))
         {
             state = GameState.Playing;
@@ -52,6 +61,7 @@ public class GameManager : MonoBehaviour
             enemySpawner.SetActive(true);
             foodSpawner.SetActive(true);
             goldSpawner.SetActive(true);
+            playStartTime = Time.time;
         }
 
         if (state == GameState.Playing && lives == 0)
@@ -67,6 +77,22 @@ public class GameManager : MonoBehaviour
         if (state == GameState.Dead && Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("main");
+        }
+    }
+
+    float CalculateScore()
+    {
+        return Time.time - playStartTime;
+    }
+
+    void SaveHighScore()
+    {
+        int score = Mathf.FloorToInt(CalculateScore());
+        int currentHighScore = PlayerPrefs.GetInt("HighScore");
+        if (score > currentHighScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
         }
     }
 }
