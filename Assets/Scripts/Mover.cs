@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum MoverType
+{
+    Enemy,
+    Food,
+    Gold
+}
+
 public class Mover : MonoBehaviour
 {
     [Header("Settings")]
