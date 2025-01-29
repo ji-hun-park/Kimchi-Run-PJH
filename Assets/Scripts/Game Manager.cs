@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
         {
             scoreText.text = "Score: " + Mathf.FloorToInt(CalculateScore());
         }
+        else if (state == GameState.Dead)
+        {
+            scoreText.text = "High Score: " + GetHighScore();
+        }
         
         if (state == GameState.Intro && Input.GetKeyDown(KeyCode.Space))
         {
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
             foodSpawner.SetActive(false);
             goldSpawner.SetActive(false);
             deadUI.SetActive(true);
+            SaveHighScore();
             state = GameState.Dead;
         }
 
@@ -94,5 +99,10 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", score);
             PlayerPrefs.Save();
         }
+    }
+
+    int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore");
     }
 }
