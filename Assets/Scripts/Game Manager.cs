@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public GameState state = GameState.Intro;
+    
+    public int lives = 3;
 
     [Header("References")]
     
@@ -20,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject foodSpawner;
     public GameObject goldSpawner;
+    
+    public PlayerController playerScript;
 
     private void Awake()
     {
@@ -45,6 +50,20 @@ public class GameManager : MonoBehaviour
             enemySpawner.SetActive(true);
             foodSpawner.SetActive(true);
             goldSpawner.SetActive(true);
+        }
+
+        if (state == GameState.Playing && lives == 0)
+        {
+            playerScript.KillPlayer();
+            enemySpawner.SetActive(false);
+            foodSpawner.SetActive(false);
+            goldSpawner.SetActive(false);
+            state = GameState.Dead;
+        }
+
+        if (state == GameState.Dead && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("main");
         }
     }
 }

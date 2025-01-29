@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void KillPlayer()
+    public void KillPlayer()
     {
         playerCollider.enabled = false;
         playerAnimator.enabled = false;
@@ -44,16 +44,12 @@ public class PlayerController : MonoBehaviour
 
     void Hit()
     {
-        lives = Mathf.Max(0, lives - 1);
-        if (lives == 0)
-        {
-            KillPlayer();
-        }
+        GameManager.instance.lives = Mathf.Max(0, GameManager.instance.lives - 1);
     }
     
     void Heal()
     {
-        lives = Mathf.Min(3, lives + 1);
+        GameManager.instance.lives = Mathf.Min(3, GameManager.instance.lives + 1);
     }
 
     void StartInvincible()
