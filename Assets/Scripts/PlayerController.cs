@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     void Hit()
     {
         GameManager.instance.lives = Mathf.Max(0, GameManager.instance.lives - 1);
+        playerSpriteRenderer.color = Color.red;
+        Invoke("ChangeWhite", 1f);
     }
     
     void Heal()
@@ -54,8 +56,13 @@ public class PlayerController : MonoBehaviour
     
     void StopInvincible()
     {
-        playerSpriteRenderer.color = Color.white;
+        ChangeWhite();
         GameManager.instance.isInvincible = false;
+    }
+
+    void ChangeWhite()
+    {
+        playerSpriteRenderer.color = Color.white;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
