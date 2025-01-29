@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     
-    public GameObject IntroUI;
+    public GameObject introUI;
+    public GameObject deadUI;
     public GameObject enemySpawner;
     public GameObject foodSpawner;
     public GameObject goldSpawner;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        IntroUI.SetActive(true);
+        introUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         if (state == GameState.Intro && Input.GetKeyDown(KeyCode.Space))
         {
             state = GameState.Playing;
-            IntroUI.SetActive(false);
+            introUI.SetActive(false);
             enemySpawner.SetActive(true);
             foodSpawner.SetActive(true);
             goldSpawner.SetActive(true);
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
             enemySpawner.SetActive(false);
             foodSpawner.SetActive(false);
             goldSpawner.SetActive(false);
+            deadUI.SetActive(true);
             state = GameState.Dead;
         }
 
