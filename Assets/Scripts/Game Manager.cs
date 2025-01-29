@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public float playStartTime;
     public int lives = 3;
+    public int maxJump;
     public bool isInvincible = false;
 
     [Header("References")]
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        maxJump = 1;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
