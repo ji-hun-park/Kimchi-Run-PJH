@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     
     private bool isGrounded = true;
     
-    private int lives = 3;
-    private bool isInvincible = false;
+    [SerializeField] private int lives = 3;
+    [SerializeField] private bool isInvincible = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
