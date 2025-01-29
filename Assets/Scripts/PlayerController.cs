@@ -14,15 +14,6 @@ public class PlayerController : MonoBehaviour
     public BoxCollider2D playerCollider;
     
     private bool isGrounded = true;
-    
-    [SerializeField] private int lives = 3;
-    [SerializeField] private bool isInvincible = false;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -54,13 +45,13 @@ public class PlayerController : MonoBehaviour
 
     void StartInvincible()
     {
-        isInvincible = true;
+        GameManager.instance.isInvincible = true;
         Invoke("StopInvincible", 5f);
     }
     
     void StopInvincible()
     {
-        isInvincible = false;
+        GameManager.instance.isInvincible = false;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -79,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!isInvincible)
+            if (!GameManager.instance.isInvincible)
             {
                 Destroy(other.gameObject);
                 Hit();

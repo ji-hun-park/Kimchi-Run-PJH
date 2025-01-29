@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameState state = GameState.Intro;
     
     public int lives = 3;
+    public bool isInvincible = false;
 
     [Header("References")]
     

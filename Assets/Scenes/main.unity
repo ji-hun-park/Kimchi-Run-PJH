@@ -760,10 +760,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  lives: 3
   IntroUI: {fileID: 1369799869}
   enemySpawner: {fileID: 415890824}
   foodSpawner: {fileID: 49616591}
   goldSpawner: {fileID: 1503116411}
+  playerScript: {fileID: 223364975}
 --- !u!4 &1029993815
 Transform:
   m_ObjectHideFlags: 0
