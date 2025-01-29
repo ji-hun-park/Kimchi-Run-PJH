@@ -8,6 +8,8 @@ TagManager:
   - Food
   - Golden
   - Jump
+  - Score
+  - MaxUp
   layers:
   - Default
   - TransparentFX

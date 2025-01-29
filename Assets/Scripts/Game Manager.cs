@@ -17,12 +17,16 @@ public class GameManager : MonoBehaviour
     public GameState state = GameState.Intro;
 
     public float playStartTime;
-    public int lives = 3;
+    public int lives;
+    public int maxHP;
+    public int score;
     public int maxJump;
-    public bool isInvincible = false;
+    public bool isInvincible;
+    public bool maxUp;
 
     [Header("References")]
     
+    public GameObject fourthHP;
     public GameObject introUI;
     public GameObject deadUI;
     public GameObject enemySpawner;
@@ -41,7 +45,12 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
+        lives = 3;
         maxJump = 1;
+        maxHP = 3;
+        maxUp = false;
+        score = 0;
+        isInvincible = false;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -93,16 +102,16 @@ public class GameManager : MonoBehaviour
 
     float CalculateScore()
     {
-        return Time.time - playStartTime;
+        return Time.time - playStartTime + score;
     }
 
     void SaveHighScore()
     {
-        int score = Mathf.FloorToInt(CalculateScore());
+        int newScore = Mathf.FloorToInt(CalculateScore());
         int currentHighScore = PlayerPrefs.GetInt("HighScore");
-        if (score > currentHighScore)
+        if (newScore > currentHighScore)
         {
-            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.SetInt("HighScore", newScore);
             PlayerPrefs.Save();
         }
     }

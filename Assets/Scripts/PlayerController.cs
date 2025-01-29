@@ -35,6 +35,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void ChangeColor(Color color)
+    {
+        if (!GameManager.instance.isInvincible)
+        {
+            CancelInvoke("ChangeWhite");
+            playerSpriteRenderer.color = color;
+            Invoke("ChangeWhite", 1f);
+        }
+    }
+
     public void KillPlayer()
     {
         CancelInvoke("ChangeWhite");
@@ -47,23 +57,32 @@ public class PlayerController : MonoBehaviour
     void Hit()
     {
         GameManager.instance.lives = Mathf.Max(0, GameManager.instance.lives - 1);
-        if (!GameManager.instance.isInvincible)
-        {
-            CancelInvoke("ChangeWhite");
-            playerSpriteRenderer.color = Color.red;
-            Invoke("ChangeWhite", 1f);
-        }
+        ChangeColor(Color.red);
     }
     
     void Heal()
     {
-        GameManager.instance.lives = Mathf.Min(3, GameManager.instance.lives + 1);
-        if (!GameManager.instance.isInvincible)
+        if (GameManager.instance.lives == GameManager.instance.maxHP) GameManager.instance.score += 10;
+        GameManager.instance.lives = Mathf.Min(GameManager.instance.maxHP, GameManager.instance.lives + 1);
+        ChangeColor(Color.green);
+    }
+
+    void GetScore()
+    {
+        GameManager.instance.score += 10;
+        ChangeColor(Color.blue);
+    }
+
+    void MaxHPPlus()
+    {
+        if (!GameManager.instance.maxUp)
         {
-            CancelInvoke("ChangeWhite");
-            playerSpriteRenderer.color = Color.green;
-            Invoke("ChangeWhite", 1f);
+            GameManager.instance.fourthHP.gameObject.SetActive(true);
+            GameManager.instance.maxHP++;
+            GameManager.instance.maxUp = true;
         }
+
+        ChangeColor(Color.magenta);
     }
 
     void StartInvincible()
@@ -126,6 +145,16 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             GameManager.instance.maxJump++;
+        }
+        else if (other.CompareTag("Score"))
+        {
+            Destroy(other.gameObject);
+            GetScore();
+        }
+        else if (other.CompareTag("MaxUp"))
+        {
+            Destroy(other.gameObject);
+            MaxHPPlus();
         }
     }
 }
