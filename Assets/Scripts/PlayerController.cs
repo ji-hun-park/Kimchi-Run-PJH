@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         playerCollider.enabled = false;
         playerAnimator.enabled = false;
-        playerRigidBody.AddForceY(jumpForce, ForceMode2D.Impulse);
+        if (isGrounded) playerRigidBody.AddForceY(jumpForce * 0.5f, ForceMode2D.Impulse);
     }
 
     void Hit()
