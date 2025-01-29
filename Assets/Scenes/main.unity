@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &16051412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +451,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 223364970}
   playerCollider: {fileID: 223364974}
   playerSpriteRenderer: {fileID: 223364971}
+  jumpCount: 0
 --- !u!1 &339830785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,12 +1064,14 @@ MonoBehaviour:
   state: 0
   playStartTime: 0
   lives: 3
+  maxJump: 0
   isInvincible: 0
   introUI: {fileID: 1369799869}
   deadUI: {fileID: 750841867}
   enemySpawner: {fileID: 415890824}
   foodSpawner: {fileID: 49616591}
   goldSpawner: {fileID: 1503116411}
+  jumpSpawner: {fileID: 1409585657}
   playerScript: {fileID: 223364975}
   scoreText: {fileID: 2001389018}
 --- !u!4 &1029993815
@@ -1545,6 +1548,54 @@ Transform:
   m_Children:
   - {fileID: 1965913162}
   - {fileID: 727806105}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1409585657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409585659}
+  - component: {fileID: 1409585658}
+  m_Layer: 0
+  m_Name: Jump Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1409585658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409585657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02fa92ea6023b48b7b1d34fcbf5c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpawnDelay: 50
+  maxSpawnDelay: 75
+  gameObjects:
+  - {fileID: 7224879876409341858, guid: 538768d733122ab41865bec84b2ee1cb, type: 3}
+--- !u!4 &1409585659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409585657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.96, y: -1.18, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1503116411
@@ -2162,6 +2213,7 @@ SceneRoots:
   - {fileID: 415890826}
   - {fileID: 49616593}
   - {fileID: 1503116413}
+  - {fileID: 1409585659}
   - {fileID: 1029993815}
   - {fileID: 1369799870}
   - {fileID: 750841868}

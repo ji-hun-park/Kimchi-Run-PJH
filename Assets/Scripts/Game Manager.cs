@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject foodSpawner;
     public GameObject goldSpawner;
+    public GameObject jumpSpawner;
     
     public PlayerController playerScript;
     
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
             enemySpawner.SetActive(true);
             foodSpawner.SetActive(true);
             goldSpawner.SetActive(true);
+            jumpSpawner.SetActive(true);
             playStartTime = Time.time;
         }
 
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
             enemySpawner.SetActive(false);
             foodSpawner.SetActive(false);
             goldSpawner.SetActive(false);
+            jumpSpawner.SetActive(false);
             deadUI.SetActive(true);
             SaveHighScore();
             state = GameState.Dead;

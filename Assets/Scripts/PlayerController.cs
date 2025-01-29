@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsJumpable())
+        if (Input.GetKeyDown(KeyCode.Space) && IsJumpable() && GameManager.instance.state == GameState.Playing)
         {
             playerRigidBody.AddForceY(jumpForce, ForceMode2D.Impulse);
             jumpCount--;
@@ -46,18 +46,24 @@ public class PlayerController : MonoBehaviour
 
     void Hit()
     {
-        CancelInvoke("ChangeWhite");
         GameManager.instance.lives = Mathf.Max(0, GameManager.instance.lives - 1);
-        playerSpriteRenderer.color = Color.red;
-        Invoke("ChangeWhite", 1f);
+        if (!GameManager.instance.isInvincible)
+        {
+            CancelInvoke("ChangeWhite");
+            playerSpriteRenderer.color = Color.red;
+            Invoke("ChangeWhite", 1f);
+        }
     }
     
     void Heal()
     {
-        CancelInvoke("ChangeWhite");
         GameManager.instance.lives = Mathf.Min(3, GameManager.instance.lives + 1);
-        playerSpriteRenderer.color = Color.green;
-        Invoke("ChangeWhite", 1f);
+        if (!GameManager.instance.isInvincible)
+        {
+            CancelInvoke("ChangeWhite");
+            playerSpriteRenderer.color = Color.green;
+            Invoke("ChangeWhite", 1f);
+        }
     }
 
     void StartInvincible()
