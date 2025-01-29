@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     
     public BoxCollider2D playerCollider;
     
+    public SpriteRenderer playerSpriteRenderer;
+    
     private bool isGrounded = true;
 
     // Update is called once per frame
@@ -45,12 +47,14 @@ public class PlayerController : MonoBehaviour
 
     void StartInvincible()
     {
+        playerSpriteRenderer.color = Color.yellow;
         GameManager.instance.isInvincible = true;
         Invoke("StopInvincible", 5f);
     }
     
     void StopInvincible()
     {
+        playerSpriteRenderer.color = Color.white;
         GameManager.instance.isInvincible = false;
     }
     

@@ -450,6 +450,7 @@ MonoBehaviour:
   playerRigidBody: {fileID: 223364973}
   playerAnimator: {fileID: 223364970}
   playerCollider: {fileID: 223364974}
+  playerSpriteRenderer: {fileID: 223364971}
 --- !u!1 &339830785
 GameObject:
   m_ObjectHideFlags: 0
